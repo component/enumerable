@@ -27,7 +27,7 @@ function Enumerable(obj) {
   return obj;
 }
 
-/**
+/*!
  * Default iterator utilizing `.length` and subscripts.
  */
 

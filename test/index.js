@@ -232,6 +232,14 @@ describe('.map(fn)', function(){
   })
 })
 
+describe('.map(str)', function(){
+  it('should map property values', function(){
+    _([{ age: 2 }, { age: 2 }, { age: 8 }])
+      .map('age')
+      .should.eql([2, 2, 8]);
+  })
+})
+
 describe('.reduce(fn)', function(){
   it('should use the first value as the accumulator', function(){
     _([1,2,3,4,5])

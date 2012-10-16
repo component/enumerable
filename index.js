@@ -65,6 +65,7 @@ Enumerable.prototype.each = function(fn){
  */
 
 Enumerable.prototype.map = function(fn){
+  fn = toFunction(fn);
   var vals = this.__iterate__();
   var len = vals.length();
   var arr = [];

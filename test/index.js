@@ -207,6 +207,20 @@ describe('.first(fn)', function(){
   })
 })
 
+describe('.last()', function(){
+  it('should return the last value', function(){
+    _(['foo', 'bar']).last().should.equal('bar');
+  })
+})
+
+describe('.last(n)', function(){
+  it('should return the last N values', function(){
+    _(['foo', 'bar', 'baz']).last(1).should.eql(['baz']);
+    _(['foo', 'bar', 'baz']).last(2).should.eql(['bar', 'baz']);
+    _(['foo', 'bar', 'baz']).last(123).should.eql(['foo', 'bar', 'baz']);
+  })
+})
+
 describe('.inGroupsOf(n)', function(){
   it('should return an array in groups of N', function(){
     _([1,2,3,4,5,6])

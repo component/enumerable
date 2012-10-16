@@ -379,12 +379,7 @@ Enumerable.prototype.mean = function(fn){
  */
 
 Enumerable.prototype.first = function(n){
-  var ret;
-
-  if ('function' == typeof n) {
-    return this.find(n);
-  }
-
+  if ('function' == typeof n) return this.find(n);
   var vals = this.__iterate__();
 
   if (n) {
@@ -397,6 +392,30 @@ Enumerable.prototype.first = function(n){
   }
 
   return vals.get(0);
+};
+
+/**
+ * Return the last value, or last `n` values.
+ *
+ * @param {Number|Function} [n]
+ * @return {Array|Mixed}
+ * @api public
+ */
+
+Enumerable.prototype.last = function(n){
+  var vals = this.__iterate__();
+  var len = vals.length();
+
+  if (n) {
+    var i = Math.max(0, len - n);
+    var arr = [];
+    for (; i < len; ++i) {
+      arr.push(vals.get(i));
+    }
+    return arr;
+  }
+
+  return vals.get(len - 1);
 };
 
 /**
@@ -468,7 +487,6 @@ Enumerable.prototype.array = function(){
 //   .mean
 //   .mode
 //   .groupBy
-//   .inGroupsOf
 //   .minmax
 //   .last()
 //   .last(n)

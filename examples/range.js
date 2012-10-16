@@ -6,8 +6,6 @@
 var Enumerable = require('..');
 
 function Range(from, to) {
-  this.i = 0;
-  this.curr = from;
   this.from = from;
   this.to = to;
 }
@@ -16,9 +14,9 @@ Enumerable(Range.prototype);
 
 Range.prototype.__iterate__ = function(){
   var self = this;
-  return function(){
-    if (self.curr > self.to) return;
-    return [self.curr++, self.i++];
+  return {
+    length: function(){ return self.to - self.from + 1 },
+    get: function(i){ return self.from + i }
   }
 };
 

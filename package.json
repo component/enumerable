@@ -1,0 +1,11 @@
+{
+  "name": "enumerable",
+  "version": "0.0.1",
+  "dependencies": {
+    "to-function": "0.0.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  }
+}

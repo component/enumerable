@@ -303,7 +303,7 @@ describe('.array()', function(){
 })
 
 describe('.toJSON()', function(){
-  it('should alias .toArray()', function(){
+  it('should alias .array()', function(){
     JSON.stringify(user).should.equal('["first","last"]');
     JSON.stringify(_([1,2,3])).should.equal('[1,2,3]');
   })

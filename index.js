@@ -446,7 +446,7 @@ Enumerable.prototype.at = function(i){
  */
 
 Enumerable.prototype.toJSON =
-Enumerable.prototype.toArray = function(){
+Enumerable.prototype.array = function(){
   var arr = [];
   var vals = this.__iterate__();
   var len = vals.length();

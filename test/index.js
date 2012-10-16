@@ -266,9 +266,9 @@ describe('.at(i)', function(){
   })
 })
 
-describe('.toArray()', function(){
+describe('.array()', function(){
   it('should return an array of values', function(){
-    _([1,2,3]).toArray().should.eql([1,2,3]);
+    _([1,2,3]).array().should.eql([1,2,3]);
   })
 })
 

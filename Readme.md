@@ -52,7 +52,7 @@
 
   Grep values using the given `re`.
 
-### Enumerable#reduce(fn:Function,[val]:Mixed)
+### Enumerable#reduce(fn:Function, [val]:Mixed)
 
   Reduce with `fn(accumulator, val, i)` using
   optional initial `val` defaulting to the first

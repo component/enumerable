@@ -541,7 +541,6 @@ mixin(Enumerable.prototype);
 //   docs
 //   optional async?
 //   .equal()
-//   chain of same constructor
 //   toFunction for most
 //   .sort
 //   .map

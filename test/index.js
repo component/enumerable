@@ -25,6 +25,14 @@ describe('.find(fn)', function(){
   })
 })
 
+describe('.findLast(fn)', function(){
+  it('should return the last truthy callback value', function(){
+    _(['foo', 'bar', 'baz']).findLast(function(v){
+      return v != 'foo';
+    }).should.equal('baz');
+  })
+})
+
 describe('.every(fn)', function(){
   it('should alias .all()', function(){
     var arr = _([1,2,3,4,5]);

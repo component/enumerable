@@ -358,7 +358,7 @@ Enumerable.prototype.mean = function(fn){
 /**
  * Return the first value, or first `n` values.
  *
- * @param {Number} [n]
+ * @param {Number|Function} [n]
  * @return {Array|Mixed}
  * @api public
  */

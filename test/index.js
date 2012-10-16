@@ -241,6 +241,14 @@ describe('.reduce(fn, init)', function(){
   })
 })
 
+describe('.at(i)', function(){
+  it('should return a value at the given index', function(){
+    _(['foo', 'bar', 'baz']).at(0).should.equal('foo');
+    _(['foo', 'bar', 'baz']).at(1).should.equal('bar');
+    _(['foo', 'bar', 'baz']).at(2).should.equal('baz');
+  })
+})
+
 describe('.toArray()', function(){
   it('should return an array of values', function(){
     _([1,2,3]).toArray().should.eql([1,2,3]);

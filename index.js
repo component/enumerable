@@ -419,6 +419,18 @@ Enumerable.prototype.inGroupsOf = function(n){
 };
 
 /**
+ * Return the value at the given index.
+ *
+ * @param {Number} i
+ * @return {Mixed}
+ * @api public
+ */
+
+Enumerable.prototype.at = function(i){
+  return this.getIterator().get(i);
+};
+
+/**
  * Return a regular `Array`.
  *
  * @return {Array}

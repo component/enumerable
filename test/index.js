@@ -120,7 +120,7 @@ describe('.select(fn)', function(){
   it('should select values of truthy return', function(){
     _([1,2,3,4,5]).select(function(n){
       return n < 3;
-    }).should.eql([1,2]);
+    }).value().should.eql([1,2]);
   })
 })
 
@@ -128,19 +128,19 @@ describe('.reject(fn)', function(){
   it('should select values of falsey return', function(){
     _([1,2,3,4,5]).reject(function(n){
       return n < 3;
-    }).should.eql([3,4,5]);
+    }).value().should.eql([3,4,5]);
   })
 })
 
 describe('.reject(val)', function(){
   it('should reject values with ==', function(){
-    _([1,null,2,undefined]).reject(null).should.eql([1,2]);
+    _([1,null,2,undefined]).reject(null).value().should.eql([1,2]);
   })
 })
 
 describe('.compact()', function(){
   it('should reject == null', function(){
-    _([1,null,2,undefined]).compact().should.eql([1,2]);
+    _([1,null,2,undefined]).compact().value().should.eql([1,2]);
   })
 })
 
@@ -182,7 +182,7 @@ describe('.indexOf(value)', function(){
 
 describe('.grep(regexp)', function(){
   it('should return values matching the regexp', function(){
-    _(['foo', 'bar', 'baz']).grep(/^b/).should.eql(['bar', 'baz']);
+    _(['foo', 'bar', 'baz']).grep(/^b/).value().should.eql(['bar', 'baz']);
   })
 })
 
@@ -241,14 +241,17 @@ describe('.inGroupsOf(n)', function(){
   it('should return an array in groups of N', function(){
     _([1,2,3,4,5,6])
       .inGroupsOf(3)
+      .value()
       .should.eql([[1,2,3], [4,5,6]]);
 
     _([1,2,3,4,5,6])
       .inGroupsOf(2)
+      .value()
       .should.eql([[1,2], [3,4], [5,6]]);
 
     _([1,2,3,4,5,6,7])
       .inGroupsOf(2)
+      .value()
       .should.eql([[1,2], [3,4], [5,6], [7]]);
   })
 })
@@ -258,7 +261,7 @@ describe('.map(fn)', function(){
     _([1,2,3])
     .map(function(n){
       return n * 2;
-    }).should.eql([2,4,6]);
+    }).value().should.eql([2,4,6]);
   })
 })
 
@@ -266,7 +269,15 @@ describe('.map(str)', function(){
   it('should map property values', function(){
     _([{ age: 2 }, { age: 2 }, { age: 8 }])
       .map('age')
+      .value()
       .should.eql([2, 2, 8]);
+  })
+
+  it('should chain', function(){
+    _([{ age: 2 }, { age: 2 }, { age: 8 }])
+      .map('age')
+      .last()
+      .should.equal(8);
   })
 })
 

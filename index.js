@@ -3,28 +3,37 @@
  * Module dependencies.
  */
 
-var toFunction = require('to-function');
+var toFunction = require('to-function')
+  , proto = {};
 
 /**
- * Expose `Enumerable`.
+ * Expose `mixin()`.
  */
 
-module.exports = Enumerable;
+module.exports = mixin
 
 /**
  * Mixin to `obj`.
- *
+ * 
  * @param {Object} obj
  * @return {Object} obj
- * @api public
+ */
+
+function mixin(obj){
+  for (var key in proto) obj[key] = proto[key];
+  obj.__iterate__ = obj.__iterate__ || defaultIterator;
+  return obj;
+}
+
+/**
+ * Initialize a new `Enumerable` with the given `obj`.
+ *
+ * @param {Object} obj
+ * @api private
  */
 
 function Enumerable(obj) {
-  for (var key in Enumerable.prototype) {
-    obj[key] = Enumerable.prototype[key];
-  }
-  obj.__iterate__ = obj.__iterate__ || defaultIterator;
-  return obj;
+  this.obj = obj;
 }
 
 /*!
@@ -40,6 +49,19 @@ function defaultIterator() {
 }
 
 /**
+ * Iterate enumerable.
+ *
+ * @return {Object}
+ * @api private
+ */
+
+Enumerable.prototype.__iterate__ = function(){
+  var obj = this.obj;
+  obj.__iterate__ = obj.__iterate__ || defaultIterator;
+  return obj.__iterate__();
+};
+
+/**
  * Iterate each value and invoke `fn(val, i)`.
  *
  * @param {Function} fn
@@ -47,7 +69,7 @@ function defaultIterator() {
  * @api public
  */
 
-Enumerable.prototype.each = function(fn){
+proto.each = function(fn){
   var vals = this.__iterate__();
   var len = vals.length();
   for (var i = 0; i < len; ++i) {
@@ -60,11 +82,11 @@ Enumerable.prototype.each = function(fn){
  * Map each return value from `fn(val, i)`.
  *
  * @param {Function} fn
- * @return {Array}
+ * @return {Enumerable}
  * @api public
  */
 
-Enumerable.prototype.map = function(fn){
+proto.map = function(fn){
   fn = toFunction(fn);
   var vals = this.__iterate__();
   var len = vals.length();
@@ -72,18 +94,18 @@ Enumerable.prototype.map = function(fn){
   for (var i = 0; i < len; ++i) {
     arr.push(fn(vals.get(i), i));
   }
-  return arr;
+  return new Enumerable(arr);
 };
 
 /**
  * Select all values that return a truthy value of `fn(val, i)`.
  *
  * @param {Function} fn
- * @return {Array}
+ * @return {Enumerable}
  * @api public
  */
 
-Enumerable.prototype.select = function(fn){
+proto.select = function(fn){
   var val;
   var arr = [];
   var vals = this.__iterate__();
@@ -92,18 +114,18 @@ Enumerable.prototype.select = function(fn){
     val = vals.get(i);
     if (fn(val, i)) arr.push(val);
   }
-  return arr;
+  return new Enumerable(arr);
 };
 
 /**
  * Reject all values that return a truthy value of `fn(val, i)`.
  *
  * @param {Function} fn
- * @return {Array}
+ * @return {Enumerable}
  * @api public
  */
 
-Enumerable.prototype.reject = function(fn){
+proto.reject = function(fn){
   var val;
   var arr = [];
   var vals = this.__iterate__();
@@ -121,18 +143,18 @@ Enumerable.prototype.reject = function(fn){
     }
   }
 
-  return arr;
+  return new Enumerable(arr);
 };
 
 /**
  * Reject `null` and `undefined`.
  *
- * @return {Array}
+ * @return {Enumerable}
  * @api public
  */
 
 
-Enumerable.prototype.compact = function(){
+proto.compact = function(){
   return this.reject(null);
 };
 
@@ -145,7 +167,7 @@ Enumerable.prototype.compact = function(){
  * @api public
  */
 
-Enumerable.prototype.find = function(fn){
+proto.find = function(fn){
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
@@ -164,7 +186,7 @@ Enumerable.prototype.find = function(fn){
  * @api public
  */
 
-Enumerable.prototype.findLast = function(fn){
+proto.findLast = function(fn){
   var ret;
   var val;
   var vals = this.__iterate__();
@@ -184,8 +206,8 @@ Enumerable.prototype.findLast = function(fn){
  * @api public
  */
 
-Enumerable.prototype.all =
-Enumerable.prototype.every = function(fn){
+proto.all =
+proto.every = function(fn){
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
@@ -204,7 +226,7 @@ Enumerable.prototype.every = function(fn){
  * @api public
  */
 
-Enumerable.prototype.any = function(fn){
+proto.any = function(fn){
   fn = toFunction(fn);
   var val;
   var vals = this.__iterate__();
@@ -224,7 +246,7 @@ Enumerable.prototype.any = function(fn){
  * @api public
  */
 
-Enumerable.prototype.count = function(fn){
+proto.count = function(fn){
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
@@ -244,7 +266,7 @@ Enumerable.prototype.count = function(fn){
  * @api public
  */
 
-Enumerable.prototype.indexOf = function(obj){
+proto.indexOf = function(obj){
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
@@ -259,11 +281,11 @@ Enumerable.prototype.indexOf = function(obj){
  * Grep values using the given `re`.
  *
  * @param {RegExp} re
- * @return {Array}
+ * @return {Enumerable}
  * @api public
  */
 
-Enumerable.prototype.grep = function(re){
+proto.grep = function(re){
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
@@ -272,7 +294,7 @@ Enumerable.prototype.grep = function(re){
     val = vals.get(i);
     if (re.test(val)) arr.push(val);
   }
-  return arr;
+  return new Enumerable(arr);
 };
 
 /**
@@ -286,7 +308,7 @@ Enumerable.prototype.grep = function(re){
  * @api public
  */
 
-Enumerable.prototype.reduce = function(fn, init){
+proto.reduce = function(fn, init){
   var val;
   var i = 0;
   var vals = this.__iterate__();
@@ -311,7 +333,7 @@ Enumerable.prototype.reduce = function(fn, init){
  * @api public
  */
 
-Enumerable.prototype.max = function(fn){
+proto.max = function(fn){
   var val;
   var n = 0;
   var max = 0;
@@ -342,7 +364,7 @@ Enumerable.prototype.max = function(fn){
  * @api public
  */
 
-Enumerable.prototype.sum = function(fn){
+proto.sum = function(fn){
   var ret;
   var n = 0;
   var vals = this.__iterate__();
@@ -370,8 +392,8 @@ Enumerable.prototype.sum = function(fn){
  * @api public
  */
 
-Enumerable.prototype.avg =
-Enumerable.prototype.mean = function(fn){
+proto.avg =
+proto.mean = function(fn){
   var ret;
   var n = 0;
   var vals = this.__iterate__();
@@ -399,7 +421,7 @@ Enumerable.prototype.mean = function(fn){
  * @api public
  */
 
-Enumerable.prototype.first = function(n){
+proto.first = function(n){
   if ('function' == typeof n) return this.find(n);
   var vals = this.__iterate__();
 
@@ -423,7 +445,7 @@ Enumerable.prototype.first = function(n){
  * @api public
  */
 
-Enumerable.prototype.last = function(n){
+proto.last = function(n){
   if ('function' == typeof n) return this.findLast(n);
   var vals = this.__iterate__();
   var len = vals.length();
@@ -444,11 +466,11 @@ Enumerable.prototype.last = function(n){
  * Return values in groups of `n`.
  *
  * @param {Number} n
- * @return {Array}
+ * @return {Enumerable}
  * @api public
  */
 
-Enumerable.prototype.inGroupsOf = function(n){
+proto.inGroupsOf = function(n){
   var arr = [];
   var group = [];
   var vals = this.__iterate__();
@@ -464,7 +486,7 @@ Enumerable.prototype.inGroupsOf = function(n){
 
   if (group.length) arr.push(group);
 
-  return arr;
+  return new Enumerable(arr);
 };
 
 /**
@@ -475,7 +497,7 @@ Enumerable.prototype.inGroupsOf = function(n){
  * @api public
  */
 
-Enumerable.prototype.at = function(i){
+proto.at = function(i){
   return this.__iterate__().get(i);
 };
 
@@ -486,8 +508,8 @@ Enumerable.prototype.at = function(i){
  * @api public
  */
 
-Enumerable.prototype.toJSON =
-Enumerable.prototype.array = function(){
+proto.toJSON =
+proto.array = function(){
   var arr = [];
   var vals = this.__iterate__();
   var len = vals.length();
@@ -496,6 +518,24 @@ Enumerable.prototype.array = function(){
   }
   return arr;
 };
+
+/**
+ * Return the enumerable value.
+ *
+ * @return {Mixed}
+ * @api public
+ */
+
+proto.value = function(){
+  return this.obj;
+};
+
+/**
+ * Mixin enumerable.
+ */
+
+mixin(Enumerable.prototype);
+
 
 // TODO:
 //   docs

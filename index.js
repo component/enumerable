@@ -536,7 +536,6 @@ proto.value = function(){
 
 mixin(Enumerable.prototype);
 
-
 // TODO:
 //   docs
 //   optional async?

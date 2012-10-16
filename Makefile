@@ -13,4 +13,7 @@ test:
 		--reporter spec \
 		--require should
 
-.PHONY: clean test
+docs:
+	@dox --api < index.js | sed 's/proto/Enumerable/'
+
+.PHONY: clean test docs

@@ -200,7 +200,7 @@ describe('.first(n)', function(){
 })
 
 describe('.first(fn)', function(){
-  it('should return the truthy value', function(){
+  it('should return the first truthy value', function(){
     _(['foo', 'bar', 'something']).first(function(str){
       return str.length > 3;
     }).should.equal('something');
@@ -218,6 +218,14 @@ describe('.last(n)', function(){
     _(['foo', 'bar', 'baz']).last(1).should.eql(['baz']);
     _(['foo', 'bar', 'baz']).last(2).should.eql(['bar', 'baz']);
     _(['foo', 'bar', 'baz']).last(123).should.eql(['foo', 'bar', 'baz']);
+  })
+})
+
+describe('.last(fn)', function(){
+  it('should return the last truthy value', function(){
+    _(['foo', 'bar', 'something', 'even-longer']).last(function(str){
+      return str.length > 3;
+    }).should.equal('even-longer');
   })
 })
 

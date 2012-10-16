@@ -156,6 +156,27 @@ Enumerable.prototype.find = function(fn){
 };
 
 /**
+ * Return the last value when `fn(val, i)` is truthy,
+ * otherwise return `undefined`.
+ *
+ * @param {Function} fn
+ * @return {Mixed}
+ * @api public
+ */
+
+Enumerable.prototype.findLast = function(fn){
+  var ret;
+  var val;
+  var vals = this.__iterate__();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (fn(val, i)) ret = val;
+  }
+  return ret;
+};
+
+/**
  * Assert that all invocations of `fn(val, i)` are truthy.
  *
  * @param {Function} fn
@@ -403,6 +424,7 @@ Enumerable.prototype.first = function(n){
  */
 
 Enumerable.prototype.last = function(n){
+  if ('function' == typeof n) return this.findLast(n);
   var vals = this.__iterate__();
   var len = vals.length();
 

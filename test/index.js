@@ -154,7 +154,7 @@ describe('.any(str)', function(){
     var tobi = { name: 'tobi', admin: true };
     var loki = { name: 'loki', admin: false };
     var jane = { name: 'jane', admin: false };
-    var users = Enumerable([tobi, loki, jane]);
+    var users = _([tobi, loki, jane]);
     users.any('admin').should.be.true;
     users.any('something').should.be.false;
   })
@@ -249,6 +249,7 @@ describe('.toArray()', function(){
 
 describe('.toJSON()', function(){
   it('should alias .toArray()', function(){
+    JSON.stringify(user).should.equal('["first","last"]');
     JSON.stringify(_([1,2,3])).should.equal('[1,2,3]');
   })
 })

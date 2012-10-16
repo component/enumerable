@@ -427,7 +427,6 @@ Enumerable.prototype.inGroupsOf = function(n){
 
 Enumerable.prototype.toJSON =
 Enumerable.prototype.toArray = function(){
-  // if (Array.isArray(this)) return this;
   var arr = [];
   var vals = this.getIterator();
   var len = vals.length();

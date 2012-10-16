@@ -10,7 +10,7 @@ clean:
 
 test:
 	@./node_modules/.bin/mocha \
-		--reporter spec \
+		--reporter dot \
 		--require should
 
 docs:

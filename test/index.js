@@ -223,6 +223,15 @@ describe('.inGroupsOf(n)', function(){
   })
 })
 
+describe('.map(fn)', function(){
+  it('should map values returned by the function', function(){
+    _([1,2,3])
+    .map(function(n){
+      return n * 2;
+    }).should.eql([2,4,6]);
+  })
+})
+
 describe('.reduce(fn)', function(){
   it('should use the first value as the accumulator', function(){
     _([1,2,3,4,5])

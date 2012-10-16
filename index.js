@@ -57,6 +57,24 @@ Enumerable.prototype.each = function(fn){
 };
 
 /**
+ * Map each return value from `fn(val, i)`.
+ *
+ * @param {Function} fn
+ * @return {Array}
+ * @api public
+ */
+
+Enumerable.prototype.map = function(fn){
+  var vals = this.__iterate__();
+  var len = vals.length();
+  var arr = [];
+  for (var i = 0; i < len; ++i) {
+    arr.push(fn(vals.get(i), i));
+  }
+  return arr;
+};
+
+/**
  * Select all values that return a truthy value of `fn(val, i)`.
  *
  * @param {Function} fn

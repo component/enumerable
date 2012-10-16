@@ -10,25 +10,18 @@ var user = new User('Tobi', 'Holowaychuk');
 describe('.each(fn)', function(){
   it('should iterate each value', function(){
     var vals = [];
-    var keys = [];
 
-    user.each(function(val, key){
+    user.each(function(val){
       vals.push(val);
-      keys.push(key);
     });
 
-    vals.should.eql(['Tobi', 'Holowaychuk']);
-    keys.should.eql(['first', 'last']);
+    vals.should.eql(['first', 'last']);
   })
 })
 
 describe('.find(fn)', function(){
   it('should return the first truthy callback value', function(){
-    var val = user.find(function(val, key){
-      return 'last' == key;
-    });
-
-    val.should.equal('Holowaychuk');
+    _([1,2,3]).find(function(v){ return v == 2 }).should.equal(2);
   })
 })
 

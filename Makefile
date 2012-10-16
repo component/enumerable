@@ -11,6 +11,7 @@ clean:
 test:
 	@./node_modules/.bin/mocha \
 		--reporter spec \
+		--bail \
 		--require should
 
 .PHONY: clean test

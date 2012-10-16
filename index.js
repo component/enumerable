@@ -33,12 +33,9 @@ function Enumerable(obj) {
 
 function defaultIterator() {
   var self = this;
-  var len = this.length;
-  var i = 0;
-  return function(){
-    return i < len
-      ? [self[i], i++]
-      : null;
+  return {
+    length: function(){ return self.length },
+    get: function(i){ return self[i] }
   }
 }
 
@@ -62,9 +59,11 @@ Enumerable.prototype.getIterator = function(){
  */
 
 Enumerable.prototype.each = function(fn){
-  var ret;
-  var next = this.getIterator();
-  while (ret = next()) fn(ret[0], ret[1]);
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    fn(vals.get(i), i);
+  }
   return this;
 };
 
@@ -77,13 +76,13 @@ Enumerable.prototype.each = function(fn){
  */
 
 Enumerable.prototype.select = function(fn){
-  var ret;
+  var val;
   var arr = [];
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (fn(ret[0], ret[1])) {
-      arr.push(ret[0]);
-    }
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (fn(val, i)) arr.push(val);
   }
   return arr;
 };
@@ -97,21 +96,20 @@ Enumerable.prototype.select = function(fn){
  */
 
 Enumerable.prototype.reject = function(fn){
-  var ret;
+  var val;
   var arr = [];
-  var next = this.getIterator();
+  var vals = this.getIterator();
+  var len = vals.length();
 
   if (fn) {
-    while (ret = next()) {
-      if (!fn(ret[0], ret[1])) {
-        arr.push(ret[0]);
-      }
+    for (var i = 0; i < len; ++i) {
+      val = vals.get(i);
+      if (!fn(val, i)) arr.push(val);
     }
   } else {
-    while (ret = next()) {
-      if (fn != ret[0]) {
-        arr.push(ret[0]);
-      }
+    for (var i = 0; i < len; ++i) {
+      val = vals.get(i);
+      if (val != fn) arr.push(val);
     }
   }
 
@@ -140,12 +138,12 @@ Enumerable.prototype.compact = function(){
  */
 
 Enumerable.prototype.find = function(fn){
-  var ret;
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (fn(ret[0], ret[1])) {
-      return ret[0];
-    }
+  var val;
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (fn(val, i)) return val;
   }
 };
 
@@ -159,12 +157,12 @@ Enumerable.prototype.find = function(fn){
 
 Enumerable.prototype.all =
 Enumerable.prototype.every = function(fn){
-  var ret;
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (!fn(ret[0], ret[1])) {
-      return false;
-    }
+  var val;
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (!fn(val, i)) return false;
   }
   return true;
 };
@@ -179,12 +177,12 @@ Enumerable.prototype.every = function(fn){
 
 Enumerable.prototype.any = function(fn){
   fn = toFunction(fn);
-  var ret;
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (fn(ret[0], ret[1])) {
-      return true;
-    }
+  var val;
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (fn(val, i)) return true;
   }
   return false;
 };
@@ -198,30 +196,32 @@ Enumerable.prototype.any = function(fn){
  */
 
 Enumerable.prototype.count = function(fn){
-  var ret;
+  var val;
+  var vals = this.getIterator();
+  var len = vals.length();
   var n = 0;
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (fn(ret[0], ret[1])) ++n;
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (fn(val, i)) ++n;
   }
   return n;
 };
 
 /**
- * Determine the indexof `val` or return `-1`.
+ * Determine the indexof `obj` or return `-1`.
  *
- * @param {Mixed} val
+ * @param {Mixed} obj
  * @return {Number}
  * @api public
  */
 
-Enumerable.prototype.indexOf = function(val){
-  var ret;
-  var i = 0;
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (val === ret[0]) return i;
-    i++;
+Enumerable.prototype.indexOf = function(obj){
+  var val;
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (val === obj) return i;
   }
   return -1;
 };
@@ -235,20 +235,20 @@ Enumerable.prototype.indexOf = function(val){
  */
 
 Enumerable.prototype.grep = function(re){
-  var ret;
+  var val;
+  var vals = this.getIterator();
+  var len = vals.length();
   var arr = [];
-  var next = this.getIterator();
-  while (ret = next()) {
-    if (re.test(ret[0])) {
-      arr.push(ret[0]);
-    }
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (re.test(val)) arr.push(val);
   }
   return arr;
 };
 
 /**
  * Reduce with `fn(accumulator, val, i)` using
- * optional initial `val` defaulting to the first
+ * optional `init` value defaulting to the first
  * enumerable value.
  *
  * @param {Function} fn
@@ -257,13 +257,20 @@ Enumerable.prototype.grep = function(re){
  * @api public
  */
 
-Enumerable.prototype.reduce = function(fn, val){
-  var ret;
-  var next = this.getIterator();
-  if (null == val) val = next()[0];
-  while (ret = next()) {
-    val = fn(val, ret[0], ret[1]);
+Enumerable.prototype.reduce = function(fn, init){
+  var val;
+  var i = 0;
+  var vals = this.getIterator();
+  var len = vals.length();
+
+  val = null == init
+    ? vals.get(i++)
+    : init;
+
+  for (; i < len; ++i) {
+    val = fn(val, vals.get(i), i);
   }
+
   return val;
 };
 
@@ -276,20 +283,21 @@ Enumerable.prototype.reduce = function(fn, val){
  */
 
 Enumerable.prototype.max = function(fn){
-  var ret;
-  var next = this.getIterator();
+  var val;
   var n = 0;
   var max = 0;
+  var vals = this.getIterator();
+  var len = vals.length();
 
   if (fn) {
     fn = toFunction(fn);
-    while (ret = next()) {
-      n = fn(ret[0], ret[1]);
+    for (var i = 0; i < len; ++i) {
+      n = fn(vals.get(i), i);
       max = n > max ? n : max;
     }
   } else {
-    while (ret = next()) {
-      n = ret[0];
+    for (var i = 0; i < len; ++i) {
+      n = vals.get(i);
       max = n > max ? n : max;
     }
   }
@@ -308,16 +316,17 @@ Enumerable.prototype.max = function(fn){
 Enumerable.prototype.sum = function(fn){
   var ret;
   var n = 0;
-  var next = this.getIterator();
+  var vals = this.getIterator();
+  var len = vals.length();
 
   if (fn) {
     fn = toFunction(fn);
-    while (ret = next()) {
-      n += fn(ret[0], ret[1]);
+    for (var i = 0; i < len; ++i) {
+      n += fn(vals.get(i), i);
     }
   } else {
-    while (ret = next()) {
-      n += ret[0];
+    for (var i = 0; i < len; ++i) {
+      n += vals.get(i);
     }
   }
 
@@ -336,19 +345,17 @@ Enumerable.prototype.avg =
 Enumerable.prototype.mean = function(fn){
   var ret;
   var n = 0;
-  var len = 0;
-  var next = this.getIterator();
+  var vals = this.getIterator();
+  var len = vals.length();
 
   if (fn) {
     fn = toFunction(fn);
-    while (ret = next()) {
-      ++len;
-      n += fn(ret[0], ret[1]);
+    for (var i = 0; i < len; ++i) {
+      n += fn(vals.get(i), i);
     }
   } else {
-    while (ret = next()) {
-      ++len;
-      n += ret[0];
+    for (var i = 0; i < len; ++i) {
+      n += vals.get(i);
     }
   }
 
@@ -365,21 +372,23 @@ Enumerable.prototype.mean = function(fn){
 
 Enumerable.prototype.first = function(n){
   var ret;
-  var next = this.getIterator();
 
   if ('function' == typeof n) {
     return this.find(n);
   }
 
+  var vals = this.getIterator();
+
   if (n) {
-    var arr = [];
-    while (n-- && (ret = next())) {
-      arr.push(ret[0]);
+    var len = Math.min(n, vals.length());
+    var arr = new Array(len);
+    for (var i = 0; i < len; ++i) {
+      arr[i] = vals.get(i);
     }
     return arr;
   }
 
-  return next()[0];
+  return vals.get(0);
 };
 
 /**
@@ -391,15 +400,14 @@ Enumerable.prototype.first = function(n){
  */
 
 Enumerable.prototype.inGroupsOf = function(n){
-  var ret;
-  var i = 0;
   var arr = [];
   var group = [];
-  var next = this.getIterator();
+  var vals = this.getIterator();
+  var len = vals.length();
 
-  while (ret = next()) {
-    group.push(ret[0]);
-    if (++i % n == 0) {
+  for (var i = 0; i < len; ++i) {
+    group.push(vals.get(i));
+    if ((i + 1) % n == 0) {
       arr.push(group);
       group = [];
     }
@@ -419,10 +427,13 @@ Enumerable.prototype.inGroupsOf = function(n){
 
 Enumerable.prototype.toJSON =
 Enumerable.prototype.toArray = function(){
-  var ret;
+  // if (Array.isArray(this)) return this;
   var arr = [];
-  var next = this.getIterator();
-  while (ret = next()) arr.push(ret[0]);
+  var vals = this.getIterator();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    arr.push(vals.get(i));
+  }
   return arr;
 };
 

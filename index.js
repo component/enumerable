@@ -33,7 +33,10 @@ function mixin(obj){
  */
 
 function Enumerable(obj) {
-  if (!(this instanceof Enumerable)) return mixin(obj);
+  if (!(this instanceof Enumerable)) {
+    if (Array.isArray(obj)) return new Enumerable(obj);
+    return mixin(obj);
+  }
   this.obj = obj;
 }
 

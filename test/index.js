@@ -319,3 +319,9 @@ describe('.toJSON()', function(){
     JSON.stringify(_([1,2,3])).should.equal('[1,2,3]');
   })
 })
+
+describe('.toString()', function(){
+  it('should return a string representation', function(){
+    new Enumerable(user).toString().should.equal('[Enumerable ["first","last"]]');
+  })
+})

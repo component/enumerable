@@ -7,10 +7,10 @@ var toFunction = require('to-function')
   , proto = {};
 
 /**
- * Expose `mixin()`.
+ * Expose `Enumerable`.
  */
 
-module.exports = mixin
+module.exports = Enumerable;
 
 /**
  * Mixin to `obj`.
@@ -33,6 +33,7 @@ function mixin(obj){
  */
 
 function Enumerable(obj) {
+  if (!(this instanceof Enumerable)) return mixin(obj);
   this.obj = obj;
 }
 
@@ -47,6 +48,18 @@ function defaultIterator() {
     get: function(i){ return self[i] }
   }
 }
+
+/**
+ * Return a string representation of this enumerable.
+ *
+ * @return {String}
+ * @api public
+ */
+
+Enumerable.prototype.inspect =
+Enumerable.prototype.toString = function(){
+  return '[Enumerable ' + JSON.stringify(this.obj) + ']';
+};
 
 /**
  * Iterate enumerable.

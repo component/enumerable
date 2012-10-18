@@ -15,6 +15,9 @@ module.exports = Enumerable;
 /**
  * Mixin to `obj`.
  * 
+ *    var Enumerable = require('enumerable');
+ *    Enumerable(Something.prototype);
+ * 
  * @param {Object} obj
  * @return {Object} obj
  */
@@ -55,6 +58,8 @@ function defaultIterator() {
 /**
  * Return a string representation of this enumerable.
  *
+ *    [Enumerable [1,2,3]]
+ *
  * @return {String}
  * @api public
  */
@@ -80,6 +85,10 @@ Enumerable.prototype.__iterate__ = function(){
 /**
  * Iterate each value and invoke `fn(val, i)`.
  *
+ *    users.each(function(val, i){
+ *      
+ *    })
+ *
  * @param {Function} fn
  * @return {Object} self
  * @api public
@@ -96,6 +105,16 @@ proto.each = function(fn){
 
 /**
  * Map each return value from `fn(val, i)`.
+ *
+ * Passing a callback function:
+ *
+ *    users.map(function(user){
+ *      return user.name.first
+ *    })
+ *
+ * Passing a property string:
+ *
+ *    users.map('name.first')
  *
  * @param {Function} fn
  * @return {Enumerable}
@@ -116,6 +135,10 @@ proto.map = function(fn){
 /**
  * Select all values that return a truthy value of `fn(val, i)`.
  *
+ *    users.select(function(user){
+ *      return user.age > 20
+ *    })
+ *
  * @param {Function} fn
  * @return {Enumerable}
  * @api public
@@ -135,6 +158,17 @@ proto.select = function(fn){
 
 /**
  * Reject all values that return a truthy value of `fn(val, i)`.
+ *
+ * Rejecting using a callback:
+ *
+ *    users.reject(function(user){
+ *      return user.age < 20
+ *    })
+ *
+ * Rejecting values via `==`:
+ *
+ *    data.reject(null)
+ *    users.reject(tobi)
  *
  * @param {Function} fn
  * @return {Enumerable}
@@ -165,6 +199,9 @@ proto.reject = function(fn){
 /**
  * Reject `null` and `undefined`.
  *
+ *    [1, null, 5, undefined].compact()
+ *    // => [1,5]
+ *
  * @return {Enumerable}
  * @api public
  */
@@ -177,6 +214,10 @@ proto.compact = function(){
 /**
  * Return the first value when `fn(val, i)` is truthy,
  * otherwise return `undefined`.
+ *
+ *    users.find(function(user){
+ *      return user.role == 'admin'
+ *    })
  *
  * @param {Function} fn
  * @return {Mixed}
@@ -196,6 +237,10 @@ proto.find = function(fn){
 /**
  * Return the last value when `fn(val, i)` is truthy,
  * otherwise return `undefined`.
+ *
+ *    users.findLast(function(user){
+ *      return user.role == 'admin'
+ *    })
  *
  * @param {Function} fn
  * @return {Mixed}
@@ -217,6 +262,12 @@ proto.findLast = function(fn){
 /**
  * Assert that all invocations of `fn(val, i)` are truthy.
  *
+ * For example ensuring that all pets are ferrets:
+ *
+ *    pets.all(function(pet){
+ *      return pet.species == 'ferret'
+ *    })
+ *
  * @param {Function} fn
  * @return {Boolean}
  * @api public
@@ -237,6 +288,12 @@ proto.every = function(fn){
 /**
  * Assert that at least one invocation of `fn(val, i)` is truthy.
  *
+ * For example checking to see if any pets are ferrets:
+ *
+ *    pets.any(function(pet){
+ *      return pet.species == 'ferret'
+ *    })
+ *
  * @param {Function} fn
  * @return {Boolean}
  * @api public
@@ -256,6 +313,10 @@ proto.any = function(fn){
 
 /**
  * Count the number of times `fn(val, i)` returns true.
+ *
+ *    var n = pets.count(function(pet){
+ *      return pet.species == 'ferret'
+ *    })
  *
  * @param {Function} fn
  * @return {Number}
@@ -295,6 +356,8 @@ proto.indexOf = function(obj){
 
 /**
  * Grep values using the given `re`.
+ *
+ *    users.map('name').grep(/^tobi/i)
  *
  * @param {RegExp} re
  * @return {Enumerable}
@@ -344,6 +407,20 @@ proto.reduce = function(fn, init){
 /**
  * Determine the max value.
  *
+ * With a callback function:
+ *
+ *    pets.max(function(pet){
+ *      return pet.age
+ *    })
+ *
+ * With property strings:
+ *
+ *    pets.max('age')
+ *
+ * With immediate values:
+ *
+ *    nums.max()
+ *
  * @param {Function|String} fn
  * @return {Number}
  * @api public
@@ -375,6 +452,20 @@ proto.max = function(fn){
 /**
  * Determine the sum.
  *
+ * With a callback function:
+ *
+ *    pets.sum(function(pet){
+ *      return pet.age
+ *    })
+ *
+ * With property strings:
+ *
+ *    pets.sum('age')
+ *
+ * With immediate values:
+ *
+ *    nums.sum()
+ *
  * @param {Function|String} fn
  * @return {Number}
  * @api public
@@ -402,6 +493,20 @@ proto.sum = function(fn){
 
 /**
  * Determine the average value.
+ *
+ * With a callback function:
+ *
+ *    pets.avg(function(pet){
+ *      return pet.age
+ *    })
+ *
+ * With property strings:
+ *
+ *    pets.avg('age')
+ *
+ * With immediate values:
+ *
+ *    nums.avg()
  *
  * @param {Function|String} fn
  * @return {Number}

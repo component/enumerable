@@ -5,6 +5,14 @@
 
   TODO... finish me
 
+```js
+users
+  .map('friends')
+  .select(function(u){ return u.age > 20 })
+  .map('name.first')
+  .grep(/^T/)
+```
+
 ## Installation
 
     $ component install component/enumerable

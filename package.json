@@ -1,5 +1,5 @@
 {
-  "name": "enumerable",
+  "name": "enumerable-component",
   "version": "0.0.2",
   "dependencies": {
     "to-function": "0.0.1"

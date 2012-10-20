@@ -168,6 +168,24 @@ describe('.any(str)', function(){
   })
 })
 
+describe('.none(fn)', function(){
+  it('should return true when fn() is always false', function(){
+    var tobi = { name: 'tobi', admin: false };
+    var loki = { name: 'loki', admin: false };
+    var jane = { name: 'jane', admin: false };
+    var users = _([tobi, loki, jane]);
+    users.none(function(u){ return u.admin }).should.be.true;
+  })
+
+  it('should return false when fn() is not always false', function(){
+    var tobi = { name: 'tobi', admin: false };
+    var loki = { name: 'loki', admin: true };
+    var jane = { name: 'jane', admin: false };
+    var users = _([tobi, loki, jane]);
+    users.none(function(u){ return u.admin }).should.be.false;
+  })
+})
+
 describe('.indexOf(value)', function(){
   it('should return the index using ===', function(){
     var tobi = { name: 'tobi', admin: true };

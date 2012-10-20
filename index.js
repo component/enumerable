@@ -286,6 +286,29 @@ proto.every = function(fn){
 };
 
 /**
+ * Assert that none of the invocations of `fn(val, i)` are truthy.
+ *
+ * For example ensuring that no pets are admins:
+ *
+ *    pets.none(function(p){ return p.admin })
+ *
+ * @param {Function} fn
+ * @return {Boolean}
+ * @api public
+ */
+
+proto.none = function(fn){
+  var val;
+  var vals = this.__iterate__();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (fn(val, i)) return false;
+  }
+  return true;
+};
+
+/**
  * Assert that at least one invocation of `fn(val, i)` is truthy.
  *
  * For example checking to see if any pets are ferrets:

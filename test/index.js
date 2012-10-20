@@ -186,6 +186,19 @@ describe('.none(fn)', function(){
   })
 })
 
+describe('.none(string)', function(){
+  it('should assert with properties', function(){
+    var tobi = { name: 'tobi', admin: false };
+    var loki = { name: 'loki', admin: true };
+    var jane = { name: 'jane', admin: false };
+    var users = _([tobi, loki, jane]);
+
+    users.none('admin').should.be.false;
+    loki.admin = false;
+    users.none('admin').should.be.true;
+  })
+})
+
 describe('.indexOf(value)', function(){
   it('should return the index using ===', function(){
     var tobi = { name: 'tobi', admin: true };

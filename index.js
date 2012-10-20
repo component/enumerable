@@ -291,13 +291,15 @@ proto.every = function(fn){
  * For example ensuring that no pets are admins:
  *
  *    pets.none(function(p){ return p.admin })
+ *    pets.none('admin')
  *
- * @param {Function} fn
+ * @param {Function|String} fn
  * @return {Boolean}
  * @api public
  */
 
 proto.none = function(fn){
+  fn = toFunction(fn);
   var val;
   var vals = this.__iterate__();
   var len = vals.length();

@@ -54,6 +54,18 @@ describe('.all(fn)', function(){
   })
 })
 
+describe('.all(string)', function(){
+  it('should assert with property strings', function(){
+    var tobi = { name: 'tobi', admin: true };
+    var loki = { name: 'loki', admin: true };
+    var jane = { name: 'jane', admin: true };
+    var users = _([tobi, loki, jane]);
+    users.all('admin').should.be.true;
+    loki.admin = false;
+    users.all('admin').should.be.false;
+  })
+})
+
 describe('.mean()', function(){
   it('should alias .avg()', function(){
     _([1,2,3,4,5]).mean().should.equal(3);

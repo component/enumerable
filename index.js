@@ -268,13 +268,16 @@ proto.findLast = function(fn){
  *      return pet.species == 'ferret'
  *    })
  *
- * @param {Function} fn
+ *    users.all('admin')
+ *
+ * @param {Function|String} fn
  * @return {Boolean}
  * @api public
  */
 
 proto.all =
 proto.every = function(fn){
+  fn = toFunction(fn);
   var val;
   var vals = this.__iterate__();
   var len = vals.length();

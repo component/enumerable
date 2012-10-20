@@ -180,6 +180,31 @@ describe('.indexOf(value)', function(){
   })
 })
 
+describe('.has(value)', function(){
+  describe('when value is present', function(){
+    it('should return true', function(){
+      var tobi = { name: 'tobi', admin: true };
+      var loki = { name: 'loki', admin: false };
+      var jane = { name: 'jane', admin: false };
+      var users = _([tobi, loki, jane]);
+      users.has(tobi).should.be.true;
+      users.has(loki).should.be.true;
+      users.has(jane).should.be.true;
+    })
+  })
+
+  describe('when value is not present', function(){
+    it('should return false', function(){
+      var tobi = { name: 'tobi', admin: true };
+      var loki = { name: 'loki', admin: false };
+      var jane = { name: 'jane', admin: false };
+      var users = _([tobi, jane]);
+      users.has(loki).should.be.false;
+      users.has('something').should.be.false;
+    })
+  })
+})
+
 describe('.grep(regexp)', function(){
   it('should return values matching the regexp', function(){
     _(['foo', 'bar', 'baz']).grep(/^b/).value().should.eql(['bar', 'baz']);

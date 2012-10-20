@@ -355,6 +355,18 @@ proto.indexOf = function(obj){
 };
 
 /**
+ * Check if `obj` is present in this enumerable.
+ *
+ * @param {Mixed} obj
+ * @return {Boolean}
+ * @api public
+ */
+
+proto.has = function(obj){
+  return !! ~this.indexOf(obj);
+};
+
+/**
  * Grep values using the given `re`.
  *
  *    users.map('name').grep(/^tobi/i)
@@ -663,14 +675,11 @@ mixin(Enumerable.prototype);
 //   .equal()
 //   toFunction for most
 //   .sort
-//   .map
 //   .median
 //   .mean
 //   .mode
 //   .groupBy
 //   .minmax
-//   .last()
-//   .last(n)
 //   .flatten
 //   .union
 //   .intersect

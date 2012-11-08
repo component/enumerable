@@ -1,6 +1,6 @@
 {
   "name": "enumerable-component",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "dependencies": {
     "to-function": "0.0.1"
   },

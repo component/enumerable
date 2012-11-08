@@ -2,7 +2,7 @@
   "name": "enumerable",
   "repo": "component/enumerable",
   "description": "Enumerable mixin",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "keywords": [
     "enum",
     "enumerable",

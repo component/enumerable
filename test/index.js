@@ -367,6 +367,15 @@ describe('.reduce(fn, init)', function(){
   })
 })
 
+describe('.unique()', function(){
+  it('should select unique values', function(){
+    _([1,2,4,4,4,2,1,5,0])
+    .unique()
+    .array()
+    .should.eql([1,2,4,5,0]);
+  })
+})
+
 describe('.at(i)', function(){
   it('should return a value at the given index', function(){
     _(['foo', 'bar', 'baz']).at(0).should.equal('foo');

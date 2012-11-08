@@ -157,6 +157,28 @@ proto.select = function(fn){
 };
 
 /**
+ * Select all unique values.
+ *
+ *    nums.unique()
+ *
+ * @return {Enumerable}
+ * @api public
+ */
+
+proto.unique = function(){
+  var val;
+  var arr = [];
+  var vals = this.__iterate__();
+  var len = vals.length();
+  for (var i = 0; i < len; ++i) {
+    val = vals.get(i);
+    if (~arr.indexOf(val)) continue;
+    arr.push(val);
+  }
+  return new Enumerable(arr);
+};
+
+/**
  * Reject all values that return a truthy value of `fn(val, i)`.
  *
  * Rejecting using a callback:

@@ -136,6 +136,19 @@ describe('.select(fn)', function(){
   })
 })
 
+describe('.select(str)', function(){
+  it('should select based on a property', function(){
+    var items = [];
+    items.push({ name: 'foo', complete: true })
+    items.push({ name: 'bar', complete: false })
+    items.push({ name: 'baz', complete: true })
+    _(items)
+      .select('complete')
+      .array()
+      .should.eql([items[0], items[2]])
+  })
+})
+
 describe('.reject(fn)', function(){
   it('should select values of falsey return', function(){
     _([1,2,3,4,5]).reject(function(n){

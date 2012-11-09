@@ -139,12 +139,17 @@ proto.map = function(fn){
  *      return user.age > 20
  *    })
  *
- * @param {Function} fn
+ *  With a property:
+ *
+ *    items.select('complete')
+ *
+ * @param {Function|String} fn
  * @return {Enumerable}
  * @api public
  */
 
 proto.select = function(fn){
+  fn = toFunction(fn);
   var val;
   var arr = [];
   var vals = this.__iterate__();

@@ -73,8 +73,12 @@ users
      users.reject(function(user){
        return user.age < 20
      })
+
+  ## Rejecting with a property:
   
-  Rejecting values via `==`:
+     items.reject('complete')
+
+  ## Rejecting values via `==`:
   
      data.reject(null)
      users.reject(tobi)

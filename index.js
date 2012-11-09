@@ -192,12 +192,16 @@ proto.unique = function(){
  *      return user.age < 20
  *    })
  *
+ * Rejecting with a property:
+ *
+ *    items.reject('complete')
+ *
  * Rejecting values via `==`:
  *
  *    data.reject(null)
  *    users.reject(tobi)
  *
- * @param {Function} fn
+ * @param {Function|String|Mixed} fn
  * @return {Enumerable}
  * @api public
  */
@@ -207,6 +211,8 @@ proto.reject = function(fn){
   var arr = [];
   var vals = this.__iterate__();
   var len = vals.length();
+
+  if ('string' == typeof fn) fn = toFunction(fn);
 
   if (fn) {
     for (var i = 0; i < len; ++i) {

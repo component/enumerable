@@ -157,6 +157,19 @@ describe('.reject(fn)', function(){
   })
 })
 
+describe('.reject(str)', function(){
+  it('should reject based on a property', function(){
+    var items = [];
+    items.push({ name: 'foo', complete: true })
+    items.push({ name: 'bar', complete: false })
+    items.push({ name: 'baz', complete: true })
+    _(items)
+      .reject('complete')
+      .array()
+      .should.eql([items[1]])
+  })
+})
+
 describe('.reject(val)', function(){
   it('should reject values with ==', function(){
     _([1,null,2,undefined]).reject(null).value().should.eql([1,2]);

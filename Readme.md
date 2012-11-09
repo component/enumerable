@@ -3,8 +3,6 @@
 
   Enumerable mixin.
 
-  TODO... finish me
-
 ```js
 users
   .map('friends')
@@ -24,9 +22,9 @@ users
   Mixin to `obj`.
   
      var Enumerable = require('enumerable');
-     Enumerable(Something.Enumerabletype);
+     Enumerable(Something.prototype);
 
-### Enumerable#each(fn:Function)
+### proto#each(fn:Function)
 
   Iterate each value and invoke `fn(val, i)`.
   
@@ -34,33 +32,43 @@ users
        
      })
 
-### Enumerable#map(fn:Function)
+### proto#map(fn:Function)
 
   Map each return value from `fn(val, i)`.
   
-  Passing a callback function:
+  ## Passing a callback function
   
      users.map(function(user){
        return user.name.first
      })
   
-  Passing a property string:
+  ## Passing a property string
   
      users.map('name.first')
 
-### Enumerable#select(fn:Function)
+### proto#select(fn:Function|String)
 
   Select all values that return a truthy value of `fn(val, i)`.
   
      users.select(function(user){
        return user.age > 20
      })
+  
+   With a property:
+  
+     items.select('complete')
 
-### Enumerable#reject(fn:Function)
+### proto#unique()
+
+  Select all unique values.
+  
+     nums.unique()
+
+### proto#reject(fn:Function)
 
   Reject all values that return a truthy value of `fn(val, i)`.
   
-  Rejecting using a callback:
+  ## Rejecting using a callback
   
      users.reject(function(user){
        return user.age < 20
@@ -71,14 +79,14 @@ users
      data.reject(null)
      users.reject(tobi)
 
-### Enumerable#compact()
+### proto#compact()
 
   Reject `null` and `undefined`.
   
      [1, null, 5, undefined].compact()
      // => [1,5]
 
-### Enumerable#find(fn:Function)
+### proto#find(fn:Function)
 
   Return the first value when `fn(val, i)` is truthy,
   otherwise return `undefined`.
@@ -87,7 +95,7 @@ users
        return user.role == 'admin'
      })
 
-### Enumerable#findLast(fn:Function)
+### proto#findLast(fn:Function)
 
   Return the last value when `fn(val, i)` is truthy,
   otherwise return `undefined`.
@@ -96,17 +104,26 @@ users
        return user.role == 'admin'
      })
 
-### Enumerable#any(fn:Function)
+### proto#none(fn:Function|String)
+
+  Assert that none of the invocations of `fn(val, i)` are truthy.
+  
+  ## For example ensuring that no pets are admins
+  
+     pets.none(function(p){ return p.admin })
+     pets.none('admin')
+
+### proto#any(fn:Function)
 
   Assert that at least one invocation of `fn(val, i)` is truthy.
   
-  For example checking to see if any pets are ferrets
+  ## For example checking to see if any pets are ferrets
   
      pets.any(function(pet){
        return pet.species == 'ferret'
      })
 
-### Enumerable#count(fn:Function)
+### proto#count(fn:Function)
 
   Count the number of times `fn(val, i)` returns true.
   
@@ -114,75 +131,79 @@ users
        return pet.species == 'ferret'
      })
 
-### Enumerable#indexOf(obj:Mixed)
+### proto#indexOf(obj:Mixed)
 
   Determine the indexof `obj` or return `-1`.
 
-### Enumerable#grep(re:RegExp)
+### proto#has(obj:Mixed)
+
+  Check if `obj` is present in this enumerable.
+
+### proto#grep(re:RegExp)
 
   Grep values using the given `re`.
   
      users.map('name').grep(/^tobi/i)
 
-### Enumerable#reduce(fn:Function, [val]:Mixed)
+### proto#reduce(fn:Function, [val]:Mixed)
 
   Reduce with `fn(accumulator, val, i)` using
   optional `init` value defaulting to the first
   enumerable value.
 
-### Enumerable#max(fn:Function|String)
+### proto#max(fn:Function|String)
 
   Determine the max value.
   
-  With a callback function:
+  ## With a callback function
   
      pets.max(function(pet){
        return pet.age
      })
   
-  With property strings:
+  ## With property strings
   
      pets.max('age')
   
-  With immediate values::
+  ## With immediate values
   
      nums.max()
 
-### Enumerable#sum(fn:Function|String)
+### proto#sum(fn:Function|String)
 
   Determine the sum.
   
-  With a callback function:
+  ## With a callback function
   
      pets.sum(function(pet){
        return pet.age
      })
   
-  With property strings:
+  ## With property strings
   
      pets.sum('age')
   
-  With immediate values:
+  ## With immediate values
   
      nums.sum()
 
-### Enumerable#first([n]:Number|Function)
+### proto#first([n]:Number|Function)
 
   Return the first value, or first `n` values.
 
-### Enumerable#last([n]:Number|Function)
+### proto#last([n]:Number|Function)
 
   Return the last value, or last `n` values.
 
-### Enumerable#inGroupsOf(n:Number)
+### proto#inGroupsOf(n:Number)
 
   Return values in groups of `n`.
 
-### Enumerable#at(i:Number)
+### proto#at(i:Number)
 
   Return the value at the given index.
 
-### Enumerable#value()
+### proto#value()
 
   Return the enumerable value.
 

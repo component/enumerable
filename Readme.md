@@ -17,6 +17,30 @@ users
 
 ## API
 
+  - [mixin()](#mixin)
+  - [proto#each()](#protoeachfnfunction)
+  - [proto#map()](#protomapfnfunction)
+  - [proto#select()](#protoselectfnfunctionstring)
+  - [proto#unique()](#protounique)
+  - [proto#reject()](#protorejectfnfunctionstringmixed)
+  - [proto#compact()](#protocompact)
+  - [proto#find()](#protofindfnfunction)
+  - [proto#findLast()](#protofindlastfnfunction)
+  - [proto#none()](#protononefnfunctionstring)
+  - [proto#any()](#protoanyfnfunction)
+  - [proto#count()](#protocountfnfunction)
+  - [proto#indexOf()](#protoindexofobjmixed)
+  - [proto#has()](#protohasobjmixed)
+  - [proto#grep()](#protogrepreregexp)
+  - [proto#reduce()](#protoreducefnfunctionvalmixed)
+  - [proto#max()](#protomaxfnfunctionstring)
+  - [proto#sum()](#protosumfnfunctionstring)
+  - [proto#first()](#protofirstnnumberfunction)
+  - [proto#last()](#protolastnnumberfunction)
+  - [proto#inGroupsOf()](#protoingroupsofnnumber)
+  - [proto#at()](#protoatinumber)
+  - [proto#value()](#protovalue)
+
 ## mixin()
 
   Mixin to `obj`.

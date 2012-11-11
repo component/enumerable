@@ -14,10 +14,10 @@ module.exports = Enumerable;
 
 /**
  * Mixin to `obj`.
- * 
+ *
  *    var Enumerable = require('enumerable');
  *    Enumerable(Something.prototype);
- * 
+ *
  * @param {Object} obj
  * @return {Object} obj
  */
@@ -86,7 +86,7 @@ Enumerable.prototype.__iterate__ = function(){
  * Iterate each value and invoke `fn(val, i)`.
  *
  *    users.each(function(val, i){
- *      
+ *
  *    })
  *
  * @param {Function} fn
@@ -729,24 +729,3 @@ proto.value = function(){
  */
 
 mixin(Enumerable.prototype);
-
-// TODO:
-//   docs
-//   optional async?
-//   .equal()
-//   toFunction for most
-//   .sort
-//   .median
-//   .mean
-//   .mode
-//   .groupBy
-//   .minmax
-//   .flatten
-//   .union
-//   .intersect
-//   .unique
-//   .none
-//   .without(val)
-//   .compact == .without(null)
-//   .has / .contains
-//   .difference .diff

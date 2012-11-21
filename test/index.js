@@ -25,6 +25,16 @@ describe('.find(fn)', function(){
   })
 })
 
+describe('.find(string)', function(){
+  it('should assert with expression strings', function(){
+    var tobi = { name: 'tobi', admin: true };
+    var loki = { name: 'loki', admin: true };
+    var jane = { name: 'jane', admin: true };
+    var users = _([tobi, loki, jane]);
+    users.find('.name == "tobi"').should.equal(tobi);
+  })
+})
+
 describe('.findLast(fn)', function(){
   it('should return the last truthy callback value', function(){
     _(['foo', 'bar', 'baz']).findLast(function(v){

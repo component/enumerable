@@ -252,12 +252,17 @@ proto.compact = function(){
  *      return user.role == 'admin'
  *    })
  *
- * @param {Function} fn
+ * With a property string:
+ *
+ *    users.find('age > 20')
+ *
+ * @param {Function|String} fn
  * @return {Mixed}
  * @api public
  */
 
 proto.find = function(fn){
+  fn = toFunction(fn);
   var val;
   var vals = this.__iterate__();
   var len = vals.length();

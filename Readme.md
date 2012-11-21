@@ -6,7 +6,7 @@
 ```js
 users
   .map('friends')
-  .select(function(u){ return u.age > 20 })
+  .select('age > 20 ')
   .map('name.first')
   .grep(/^T/)
 ```

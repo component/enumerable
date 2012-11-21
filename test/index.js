@@ -70,10 +70,8 @@ describe('.all(fn)', function(){
   })
 
   it('should return false when some are falsey', function(){
-    it('should return true when all returns are truthy', function(){
-      var arr = Enumerable([1,2,3,4,5]);
-      arr.all(function(n){ return n < 4 }).should.be.false;
-    })
+    var arr = Enumerable([1,2,3,4,5]);
+    arr.all(function(n){ return n < 4 }).should.be.false;
   })
 })
 

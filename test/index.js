@@ -40,6 +40,13 @@ describe('.every(fn)', function(){
   })
 })
 
+describe('.every(string)', function(){
+  it('should assert with expression strings', function(){
+    var arr = _([1,2,3,4,5]);
+    arr.every('< 10').should.be.true;
+  })
+})
+
 describe('.all(fn)', function(){
   it('should return true when all returns are truthy', function(){
     var arr = Enumerable([1,2,3,4,5]);

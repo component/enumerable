@@ -286,6 +286,7 @@ proto.find = function(fn){
  */
 
 proto.findLast = function(fn){
+  fn = toFunction(fn);
   var ret;
   var val;
   var vals = this.__iterate__();

@@ -43,6 +43,12 @@ describe('.findLast(fn)', function(){
   })
 })
 
+describe('.findLast(string)', function(){
+  it('should assert woth expression strings', function(){
+    _(['foo', 'bar', 'baz']).findLast('!= "foo"').should.equal('baz');
+  })
+})
+
 describe('.every(fn)', function(){
   it('should alias .all()', function(){
     var arr = _([1,2,3,4,5]);

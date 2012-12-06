@@ -7,5 +7,10 @@
   "devDependencies": {
     "mocha": "*",
     "should": "*"
+  },
+  "component": {
+    "scripts": {
+      "enumerable/index.js": "index.js"
+    }
   }
 }

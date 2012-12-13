@@ -508,7 +508,7 @@ proto.reduce = function(fn, init){
 proto.max = function(fn){
   var val;
   var n = 0;
-  var max = 0;
+  var max = -Infinity;
   var vals = this.__iterate__();
   var len = vals.length();
 

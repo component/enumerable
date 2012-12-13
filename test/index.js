@@ -133,6 +133,9 @@ describe('.max()', function(){
   it('should return the max value', function(){
     _([1,2,3,4,5,2,1]).max().should.equal(5);
   })
+  it('should support negative inputs', function(){
+    _([-1,-2,-3,-4,-5,-2,-1]).max().should.equal(-1);
+  })
 })
 
 describe('.max(str)', function(){

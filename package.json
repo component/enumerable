@@ -2,7 +2,7 @@
   "name": "enumerable-component",
   "version": "0.3.1",
   "dependencies": {
-    "to-function": "1.1.1"
+    "to-function": "1.2.0"
   },
   "devDependencies": {
     "mocha": "*",

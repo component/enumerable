@@ -15,6 +15,15 @@ users
 
     $ component install component/enumerable
 
+## Implementation
+
+  Nearly all methods utilize the [to-function](github.com/component/to-function)
+  component, which converts the argument passed to a function. For example
+  `.map('name.first')` expands to a function effectively defined as `return obj.name.first`,
+  likewise `.select(/^Tobi/)` expands to `return /^Tobi/.test(str)` and so on. For details
+  check out to-function's Readme and familiarize yourself since all of that is applicable
+  to Enumerable.
+
 ## API
 
   - [mixin()](#mixin)

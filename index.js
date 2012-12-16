@@ -434,28 +434,6 @@ proto.has = function(obj){
 };
 
 /**
- * Grep values using the given `re`.
- *
- *    users.map('name').grep(/^tobi/i)
- *
- * @param {RegExp} re
- * @return {Enumerable}
- * @api public
- */
-
-proto.grep = function(re){
-  var val;
-  var vals = this.__iterate__();
-  var len = vals.length();
-  var arr = [];
-  for (var i = 0; i < len; ++i) {
-    val = vals.get(i);
-    if (re.test(val)) arr.push(val);
-  }
-  return new Enumerable(arr);
-};
-
-/**
  * Reduce with `fn(accumulator, val, i)` using
  * optional `init` value defaulting to the first
  * enumerable value.

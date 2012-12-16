@@ -31,7 +31,6 @@ users
   - [.count()](#countfnfunction)
   - [.indexOf()](#indexofobjmixed)
   - [.has()](#hasobjmixed)
-  - [.grep()](#grepreregexp)
   - [.reduce()](#reducefnfunctionvalmixed)
   - [.max()](#maxfnfunctionstring)
   - [.sum()](#sumfnfunctionstring)
@@ -44,7 +43,7 @@ users
 ## mixin()
 
   Mixin to `obj`.
-  
+
 ```js
  var Enumerable = require('enumerable');
  Enumerable(Something.prototype);
@@ -53,28 +52,28 @@ users
 ## .each(fn:Function)
 
   Iterate each value and invoke `fn(val, i)`.
-  
+
 ```js
  users.each(function(val, i){
-   
+
  })
 ```
 
 ## .map(fn:Function)
 
   Map each return value from `fn(val, i)`.
-  
+
   Passing a callback function:
-  
+
 ```js
  users.map(function(user){
    return user.name.first
  })
 ```
 
-  
+
   Passing a property string:
-  
+
 ```js
  users.map('name.first')
 ```
@@ -82,16 +81,16 @@ users
 ## .select(fn:Function|String)
 
   Select all values that return a truthy value of `fn(val, i)`.
-  
+
 ```js
  users.select(function(user){
    return user.age > 20
  })
 ```
 
-  
+
    With a property:
-  
+
 ```js
  items.select('complete')
 ```
@@ -99,7 +98,7 @@ users
 ## .unique()
 
   Select all unique values.
-  
+
 ```js
  nums.unique()
 ```
@@ -107,25 +106,25 @@ users
 ## .reject(fn:Function|String|Mixed)
 
   Reject all values that return a truthy value of `fn(val, i)`.
-  
+
   Rejecting using a callback:
-  
+
 ```js
  users.reject(function(user){
    return user.age < 20
  })
 ```
 
-  
+
   Rejecting with a property:
-  
+
 ```js
  items.reject('complete')
 ```
 
-  
+
   Rejecting values via `==`:
-  
+
 ```js
  data.reject(null)
  users.reject(toni)
@@ -134,7 +133,7 @@ users
 ## .compact()
 
   Reject `null` and `undefined`.
-  
+
 ```js
  [1, null, 5, undefined].compact()
  // => [1,5]
@@ -144,7 +143,7 @@ users
 
   Return the first value when `fn(val, i)` is truthy,
   otherwise return `undefined`.
-  
+
 ```js
  users.find(function(user){
    return user.role == 'admin'
@@ -155,7 +154,7 @@ users
 
   Return the last value when `fn(val, i)` is truthy,
   otherwise return `undefined`.
-  
+
 ```js
  users.findLast(function(user){
    return user.role == 'admin'
@@ -165,9 +164,9 @@ users
 ## .none(fn:Function|String)
 
   Assert that none of the invocations of `fn(val, i)` are truthy.
-  
+
   For example ensuring that no pets are admins:
-  
+
 ```js
  pets.none(function(p){ return p.admin })
  pets.none('admin')
@@ -176,9 +175,9 @@ users
 ## .any(fn:Function)
 
   Assert that at least one invocation of `fn(val, i)` is truthy.
-  
+
   For example checking to see if any pets are ferrets:
-  
+
 ```js
  pets.any(function(pet){
    return pet.species == 'ferret'
@@ -188,7 +187,7 @@ users
 ## .count(fn:Function)
 
   Count the number of times `fn(val, i)` returns true.
-  
+
 ```js
  var n = pets.count(function(pet){
    return pet.species == 'ferret'
@@ -203,14 +202,6 @@ users
 
   Check if `obj` is present in this enumerable.
 
-## .grep(re:RegExp)
-
-  Grep values using the given `re`.
-  
-```js
- users.map('name').grep(/^tobi/i)
-```
-
 ## .reduce(fn:Function, [val]:Mixed)
 
   Reduce with `fn(accumulator, val, i)` using
@@ -220,25 +211,25 @@ users
 ## .max(fn:Function|String)
 
   Determine the max value.
-  
+
   With a callback function:
-  
+
 ```js
  pets.max(function(pet){
    return pet.age
  })
 ```
 
-  
+
   With property strings:
-  
+
 ```js
  pets.max('age')
 ```
 
-  
+
   With immediate values:
-  
+
 ```js
  nums.max()
 ```
@@ -246,25 +237,25 @@ users
 ## .sum(fn:Function|String)
 
   Determine the sum.
-  
+
   With a callback function:
-  
+
 ```js
  pets.sum(function(pet){
    return pet.age
  })
 ```
 
-  
+
   With property strings:
-  
+
 ```js
  pets.sum('age')
 ```
 
-  
+
   With immediate values:
-  
+
 ```js
  nums.sum()
 ```

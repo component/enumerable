@@ -298,12 +298,6 @@ describe('.has(value)', function(){
   })
 })
 
-describe('.grep(regexp)', function(){
-  it('should return values matching the regexp', function(){
-    _(['foo', 'bar', 'baz']).grep(/^b/).value().should.eql(['bar', 'baz']);
-  })
-})
-
 describe('.count(fn)', function(){
   it('should return the occurrances of truthy values', function(){
     var arr = Enumerable([1,2,3,4,5]);

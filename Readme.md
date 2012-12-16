@@ -8,7 +8,7 @@ users
   .map('friends')
   .select('age > 20')
   .map('name.first')
-  .grep(/^T/)
+  .select(/^T/)
 ```
 
 ## Installation

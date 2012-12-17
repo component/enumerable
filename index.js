@@ -507,6 +507,79 @@ proto.max = function(fn){
 };
 
 /**
+ * Determine the min value.
+ *
+ * With a callback function:
+ *
+ *    pets.min(function(pet){
+ *      return pet.age
+ *    })
+ *
+ * With property strings:
+ *
+ *    pets.min('age')
+ *
+ * With immediate values:
+ *
+ *    nums.min()
+ *
+ * @param {Function|String} fn
+ * @return {Number}
+ * @api public
+ */
+
+proto.min = function(fn){
+  var val;
+  var n = 0;
+  var min = Infinity;
+  var vals = this.__iterate__();
+  var len = vals.length();
+
+  if (fn) {
+    fn = toFunction(fn);
+    for (var i = 0; i < len; ++i) {
+      n = fn(vals.get(i), i);
+      min = n < min ? n : min;
+    }
+  } else {
+    for (var i = 0; i < len; ++i) {
+      n = vals.get(i);
+      min = n < min ? n : min;
+    }
+  }
+
+  return min;
+};
+
+/**
+ * Determine the min/max values.
+ *
+ * With a callback function:
+ *
+ *    pets.minmax(function(pet){
+ *      return pet.age
+ *    })
+ *
+ * With property strings:
+ *
+ *    pets.minmax('age')
+ *
+ * With immediate values:
+ *
+ *    nums.minmax()
+ *
+ * @param {Function|String} fn
+ * @return {Number}
+ * @api public
+ */
+
+proto.minmax = function(fn){
+  var min = this.min(fn);
+  var max = this.max(fn);
+  return [min, max];
+};
+
+/**
  * Determine the sum.
  *
  * With a callback function:

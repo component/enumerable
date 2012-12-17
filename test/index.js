@@ -133,6 +133,7 @@ describe('.max()', function(){
   it('should return the max value', function(){
     _([1,2,3,4,5,2,1]).max().should.equal(5);
   })
+
   it('should support negative inputs', function(){
     _([-1,-2,-3,-4,-5,-2,-1]).max().should.equal(-1);
   })
@@ -149,6 +150,38 @@ describe('.max(fn)', function(){
     _([{ age: 5 }, { age: 2 }]).max(function(pet){
       return pet.age;
     }).should.equal(5);
+  })
+})
+
+describe('.min()', function(){
+  it('should return the min value', function(){
+    _([1,2,3,4,5,2,1]).min().should.equal(1);
+  })
+
+  it('should support negative inputs', function(){
+    _([-1,-2,-3,-4,-5,-2,-1]).min().should.equal(-5);
+  })
+})
+
+describe('.min(str)', function(){
+  it('should return the min property value', function(){
+    _([{ age: 5 }, { age: 2 }]).min('age').should.equal(2);
+  })
+})
+
+describe('.min(fn)', function(){
+  it('should return the min value', function(){
+    _([{ age: 5 }, { age: 2 }]).min(function(pet){
+      return pet.age;
+    }).should.equal(2);
+  })
+})
+
+describe('.minmax()', function(){
+  it('should a tuple', function(){
+    var arr = [1,2,3,4,5,6,5,3,2];
+    var ret = _(arr).minmax();
+    ret.should.eql([1,6]);
   })
 })
 

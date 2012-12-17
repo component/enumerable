@@ -552,34 +552,6 @@ proto.min = function(fn){
 };
 
 /**
- * Determine the min/max values.
- *
- * With a callback function:
- *
- *    pets.minmax(function(pet){
- *      return pet.age
- *    })
- *
- * With property strings:
- *
- *    pets.minmax('age')
- *
- * With immediate values:
- *
- *    nums.minmax()
- *
- * @param {Function|String} fn
- * @return {Number}
- * @api public
- */
-
-proto.minmax = function(fn){
-  var min = this.min(fn);
-  var max = this.max(fn);
-  return [min, max];
-};
-
-/**
  * Determine the sum.
  *
  * With a callback function:

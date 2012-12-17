@@ -177,14 +177,6 @@ describe('.min(fn)', function(){
   })
 })
 
-describe('.minmax()', function(){
-  it('should a tuple', function(){
-    var arr = [1,2,3,4,5,6,5,3,2];
-    var ret = _(arr).minmax();
-    ret.should.eql([1,6]);
-  })
-})
-
 describe('.select(fn)', function(){
   it('should select values of truthy return', function(){
     _([1,2,3,4,5]).select(function(n){

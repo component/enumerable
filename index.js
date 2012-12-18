@@ -379,7 +379,8 @@ proto.any = function(fn){
 };
 
 /**
- * Count the number of times `fn(val, i)` returns true.
+ * Count the number of times `fn(val, i)` returns true
+ * or, if no function supplied, return total number of values.
  *
  *    var n = pets.count(function(pet){
  *      return pet.species == 'ferret'
@@ -394,12 +395,25 @@ proto.count = function(fn){
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
+  if (!fn) return len;
   var n = 0;
   for (var i = 0; i < len; ++i) {
     val = vals.get(i);
     if (fn(val, i)) ++n;
   }
   return n;
+};
+
+/**
+ * Return total number of values.
+ *
+ * @return {Number}
+ * @api public
+ */
+
+proto.length = function() {
+  var vals = this.__iterate__();
+  return vals.length();
 };
 
 /**

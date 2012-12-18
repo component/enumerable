@@ -38,6 +38,7 @@ users
   - [.none()](#nonefnfunctionstring)
   - [.any()](#anyfnfunction)
   - [.count()](#countfnfunction)
+  - [.length()](#length)
   - [.indexOf()](#indexofobjmixed)
   - [.has()](#hasobjmixed)
   - [.reduce()](#reducefnfunctionvalmixed)
@@ -195,13 +196,18 @@ users
 
 ## .count(fn:Function)
 
-  Count the number of times `fn(val, i)` returns true.
+  Count the number of times `fn(val, i)` returns true
+  or, if no function supplied, return total number of values.
 
 ```js
  var n = pets.count(function(pet){
    return pet.species == 'ferret'
  })
 ```
+
+## .length()
+
+  Return total number of values.
 
 ## .indexOf(obj:Mixed)
 

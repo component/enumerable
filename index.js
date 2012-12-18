@@ -405,6 +405,18 @@ proto.count = function(fn){
 };
 
 /**
+ * Return total number of values.
+ *
+ * @return {Number}
+ * @api public
+ */
+
+proto.length = function() {
+  var vals = this.__iterate__();
+  return vals.length();
+};
+
+/**
  * Determine the indexof `obj` or return `-1`.
  *
  * @param {Mixed} obj

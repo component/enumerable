@@ -38,6 +38,7 @@ users
   - [.none()](#nonefnfunctionstring)
   - [.any()](#anyfnfunction)
   - [.count()](#countfnfunction)
+  - [.length()](#length)
   - [.indexOf()](#indexofobjmixed)
   - [.has()](#hasobjmixed)
   - [.reduce()](#reducefnfunctionvalmixed)
@@ -203,6 +204,10 @@ users
    return pet.species == 'ferret'
  })
 ```
+
+## .length()
+
+  Return total number of values.
 
 ## .indexOf(obj:Mixed)
 

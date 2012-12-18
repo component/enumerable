@@ -336,9 +336,16 @@ describe('.count(fn)', function(){
     var arr = Enumerable([1,2,3,4,5]);
     arr.count(function(n){ return n > 3 }).should.equal(2);
   })
-  it('should return total items if no function given', function(){
+  it('should return total number of items if no function given', function(){
     var arr = Enumerable([1,2,3,4,5]);
     arr.count().should.equal(5);
+  })
+})
+
+describe('.length()', function() {
+  it('should return total number of items', function(){
+    var arr = Enumerable([1,2,3,4,5]);
+    arr.length().should.equal(5);
   })
 })
 

@@ -49,7 +49,7 @@ users
   - [.at()](#atinumber)
   - [.value()](#value)
 
-## mixin()
+### mixin()
 
   Mixin to `obj`.
 

@@ -58,7 +58,7 @@ users
  Enumerable(Something.prototype);
 ```
 
-## .each(fn:Function)
+### .each(fn:Function)
 
   Iterate each value and invoke `fn(val, i)`.
 
@@ -68,7 +68,7 @@ users
  })
 ```
 
-## .map(fn:Function)
+### .map(fn:Function)
 
   Map each return value from `fn(val, i)`.
 
@@ -87,7 +87,7 @@ users
  users.map('name.first')
 ```
 
-## .select(fn:Function|String)
+### .select(fn:Function|String)
 
   Select all values that return a truthy value of `fn(val, i)`.
 
@@ -104,7 +104,7 @@ users
  items.select('complete')
 ```
 
-## .unique()
+### .unique()
 
   Select all unique values.
 
@@ -112,7 +112,7 @@ users
  nums.unique()
 ```
 
-## .reject(fn:Function|String|Mixed)
+### .reject(fn:Function|String|Mixed)
 
   Reject all values that return a truthy value of `fn(val, i)`.
 
@@ -139,7 +139,7 @@ users
  users.reject(toni)
 ```
 
-## .compact()
+### .compact()
 
   Reject `null` and `undefined`.
 
@@ -148,7 +148,7 @@ users
  // => [1,5]
 ```
 
-## .find(fn:Function)
+### .find(fn:Function)
 
   Return the first value when `fn(val, i)` is truthy,
   otherwise return `undefined`.
@@ -159,7 +159,7 @@ users
  })
 ```
 
-## .findLast(fn:Function)
+### .findLast(fn:Function)
 
   Return the last value when `fn(val, i)` is truthy,
   otherwise return `undefined`.
@@ -170,7 +170,7 @@ users
  })
 ```
 
-## .none(fn:Function|String)
+### .none(fn:Function|String)
 
   Assert that none of the invocations of `fn(val, i)` are truthy.
 
@@ -181,7 +181,7 @@ users
  pets.none('admin')
 ```
 
-## .any(fn:Function)
+### .any(fn:Function)
 
   Assert that at least one invocation of `fn(val, i)` is truthy.
 
@@ -193,7 +193,7 @@ users
  })
 ```
 
-## .count(fn:Function)
+### .count(fn:Function)
 
   Count the number of times `fn(val, i)` returns true.
 
@@ -203,21 +203,21 @@ users
  })
 ```
 
-## .indexOf(obj:Mixed)
+### .indexOf(obj:Mixed)
 
   Determine the indexof `obj` or return `-1`.
 
-## .has(obj:Mixed)
+### .has(obj:Mixed)
 
   Check if `obj` is present in this enumerable.
 
-## .reduce(fn:Function, [val]:Mixed)
+### .reduce(fn:Function, [val]:Mixed)
 
   Reduce with `fn(accumulator, val, i)` using
   optional `init` value defaulting to the first
   enumerable value.
 
-## .max(fn:Function|String)
+### .max(fn:Function|String)
 
   Determine the max value.
 
@@ -243,7 +243,7 @@ users
  nums.max()
 ```
 
-## .sum(fn:Function|String)
+### .sum(fn:Function|String)
 
   Determine the sum.
 
@@ -269,23 +269,23 @@ users
  nums.sum()
 ```
 
-## .first([n]:Number|Function)
+### .first([n]:Number|Function)
 
   Return the first value, or first `n` values.
 
-## .last([n]:Number|Function)
+### .last([n]:Number|Function)
 
   Return the last value, or last `n` values.
 
-## .inGroupsOf(n:Number)
+### .inGroupsOf(n:Number)
 
   Return values in groups of `n`.
 
-## .at(i:Number)
+### .at(i:Number)
 
   Return the value at the given index.
 
-## .value()
+### .value()
 
   Return the enumerable value.
 

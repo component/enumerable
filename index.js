@@ -94,6 +94,7 @@ Enumerable.prototype.__iterate__ = function(){
  * @api public
  */
 
+proto.forEach =
 proto.each = function(fn){
   var vals = this.__iterate__();
   var len = vals.length();
@@ -148,6 +149,7 @@ proto.map = function(fn){
  * @api public
  */
 
+proto.filter =
 proto.select = function(fn){
   fn = toFunction(fn);
   var val;

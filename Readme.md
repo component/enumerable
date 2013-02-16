@@ -1,4 +1,3 @@
-
 # Enumerable
 
   Enumerable mixin.
@@ -17,7 +16,7 @@ users
 
 ## Implementation
 
-  Nearly all methods utilize the [to-function](github.com/component/to-function)
+  Nearly all methods utilize the [to-function](https://github.com/component/to-function)
   component, which converts the argument passed to a function. For example
   `.map('name.first')` expands to a function effectively defined as `return obj.name.first`,
   likewise `.select(/^Tobi/)` expands to `return /^Tobi/.test(str)` and so on. For details

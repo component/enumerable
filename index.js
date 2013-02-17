@@ -289,15 +289,13 @@ proto.find = function(fn){
 
 proto.findLast = function(fn){
   fn = toFunction(fn);
-  var ret;
   var val;
   var vals = this.__iterate__();
   var len = vals.length();
-  for (var i = 0; i < len; ++i) {
+  for (var i = len - 1; i > -1; --i) {
     val = vals.get(i);
-    if (fn(val, i)) ret = val;
+    if (fn(val, i)) return val;
   }
-  return ret;
 };
 
 /**

@@ -90,7 +90,7 @@ Enumerable.prototype.__iterate__ = function(){
  *    })
  *
  * @param {Function} fn
- * @return {Object} self
+ * @return {Enumerable} self
  * @api public
  */
 
@@ -102,6 +102,18 @@ proto.each = function(fn){
     fn(vals.get(i), i);
   }
   return this;
+};
+
+/**
+ * Sort the enumerable.
+ *
+ * @param {Function} fn
+ * @return {Enumerable}
+ * @api public
+ */
+
+proto.sort = function(fn){
+  return new Enumerable(this.array().sort(fn));
 };
 
 /**

@@ -49,6 +49,23 @@ describe('.findLast(string)', function(){
   })
 })
 
+describe('.sort()', function(){
+  it('should sort the values', function(){
+    var arr = ['b', 'c', 'a', 'dd'];
+    _(arr).sort().array().should.eql(['a', 'b', 'c', 'dd']);
+  })
+})
+
+describe('.sort(fn)', function(){
+  it('should sort the values with the given callback', function(){
+    var arr = ['b', 'c', 'a', 'dd'];
+    _(arr)
+      .sort(function(a, b){ return b.length - a.length })
+      .array()
+      .should.eql(['dd', 'b', 'c', 'a']);
+  })
+})
+
 describe('.every(fn)', function(){
   it('should alias .all()', function(){
     var arr = _([1,2,3,4,5]);

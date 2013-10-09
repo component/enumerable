@@ -12,5 +12,9 @@
     "scripts": {
       "enumerable/index.js": "index.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/component/enumerable.git"
   }
 }

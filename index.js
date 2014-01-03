@@ -4,6 +4,7 @@
  */
 
 var toFunction = require('to-function')
+  , isArray = require("isarray")
   , proto = {};
 
 /**
@@ -37,7 +38,7 @@ function mixin(obj){
 
 function Enumerable(obj) {
   if (!(this instanceof Enumerable)) {
-    if (Array.isArray(obj)) return new Enumerable(obj);
+    if (isArray(obj)) return new Enumerable(obj);
     return mixin(obj);
   }
   this.obj = obj;

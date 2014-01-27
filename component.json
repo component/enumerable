@@ -11,7 +11,8 @@
     "iteration"
   ],
   "dependencies": {
-    "component/to-function": "1.2.0"
+    "component/to-function": "1.2.0",
+    "juliangruber/isarray": "*"
   },
   "development": {},
   "scripts": [

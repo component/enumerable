@@ -1,6 +1,6 @@
 {
   "name": "enumerable-component",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "dependencies": {
     "isarray": "0.0.1",
     "to-function": "^2.0.3"
